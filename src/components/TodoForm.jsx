@@ -8,14 +8,17 @@ function TodoForm({newTodo}) {
     const [message, setMessage] = useState("");
 
     const updateTask = (e) => {
-        setTask(e.target.value);
-        if(e.target.value.trim().length > 9){
-            setBtnDisabled(false);
-            setMessage("")
-        } else {
+        if(task === '') {
+            setBtnDisabled(true);
+            setMessage("");
+        } else if (task!=="" && task.trim().length <10) {
             setBtnDisabled(true);
             setMessage("Please add atleast 10 charaters for task");
+        } else {
+            setBtnDisabled(false);
+            setMessage("");
         }
+        setTask(e.target.value);
     }
 
     const formSubmition = (e) => {
@@ -27,6 +30,7 @@ function TodoForm({newTodo}) {
 
         // clear task input after submission
         setTask("");
+        setBtnDisabled(true);
     }
 
     return (
@@ -35,8 +39,7 @@ function TodoForm({newTodo}) {
                 <div className="input-group">
                 <input onChange={updateTask} style={{padding: "8px"}} type="text" text={task} placeholder="Enter task here" /> 
                 </div>
-                
-                <button disabled={btnDisabled} style={{marginTop: "5px"}} type="submit" className="btn btn-secondary">Add Task</button>
+                <input disabled={btnDisabled} style={{marginTop: "5px"}} type="submit" className="btn btn-secondary" text="Add Task" />
                 <p>{message}</p>
             </form>  
         </>

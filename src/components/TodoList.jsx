@@ -1,10 +1,18 @@
+import { useContext } from 'react';
+
 import PropTypes from 'prop-types';
 import TodoItem from "./TodoItem";
 
-function TodoList({todoData, handleDelete}) {
+
+import TodoContext from '../context/TodoContext'; 
+
+function TodoList() {
+
+    const {todoData} = useContext(TodoContext);
+
     return (
         <div>
-            {todoData.map(todo => <TodoItem key={todo.id} todo={todo} handleDelete={handleDelete} />)}
+            {todoData.map(todo => <TodoItem key={todo.id} todo={todo} />)}
         </div>
     )
 }

@@ -3,12 +3,18 @@ import { FaTimes } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 import Card from './designerComponents/Card';
 
+import TodoContext from '../context/TodoContext'; 
+import { useContext } from 'react';
 
-function TodoItem({todo, handleDelete}) {
+
+function TodoItem({todo}) {
+
+    const {deleteTodo} = useContext(TodoContext);
+
     return (
         <Card>
             <p style={{fontWeight: 'bolder'}}>{todo.task}</p>
-            <FaTimes className='close' onClick={() => handleDelete(todo.id)} />
+            <FaTimes className='close' onClick={() => deleteTodo(todo.id)} />
         </Card>
     )
 }

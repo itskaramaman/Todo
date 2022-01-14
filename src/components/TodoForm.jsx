@@ -1,7 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { v4 as uuid4 } from "uuid";
 
-function TodoForm({newTodo}) {
+import TodoContext from "../context/TodoContext";
+
+
+function TodoForm() {
+
+    const { addTodo } = useContext(TodoContext);
 
     const [task, setTask] = useState("");
     const [btnDisabled, setBtnDisabled] = useState(true);
@@ -23,7 +28,7 @@ function TodoForm({newTodo}) {
 
     const formSubmition = (e) => {
         e.preventDefault();
-        newTodo({
+        addTodo({
             id: uuid4(),
             task: task
         });
